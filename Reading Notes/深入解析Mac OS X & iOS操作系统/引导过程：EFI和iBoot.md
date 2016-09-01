@@ -88,7 +88,10 @@ iBoot自带一个内建的HFS+的驱动程序，可以访问iOS的文件系统�
 ### DFU模式引导
 再这个模式中，NAND闪存中的固件本省会被更新。当iOS有新版本更新或者越狱的时候会使用到这个模式。
 
-## Mac OS X的安装
+## OS X的安装过程
+### 步骤1：installXXX.app
+### 步骤2：OSinstaller
+### 步骤3：安装.pkg文件
 
 ---
 [1]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/The%20iOS%20Boot%20Progress.png?raw=true
