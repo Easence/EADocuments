@@ -1,4 +1,4 @@
-# 读书笔记之引导过程：EFI和iBoot
+# 引导过程：EFI和iBoot
 
 标签（空格分隔）： 《OSX&iOS内核》 读书笔记
 
@@ -41,7 +41,10 @@
 - 固件变量
 - 其他杂项
 
-## MAC的boot.efi
+## OS X的boot.efi
+1. 调用EFI引导服务来完成获取设备树、画logo、加载链接好的内核（loadKernelCache）、加载RAMDisk到内存、跳转到内核入口点等工作。
+2. 引导内核，EFI引导服务退出。
+3. 内核回调EFI运行时服务。
 
 ## iOS的iBoot
 iOS的引导是苹果独创的，构成如图1所示，起引导过程分两条主线：
@@ -49,16 +52,46 @@ iOS的引导是苹果独创的，构成如图1所示，起引导过程分两条�
 - **普通引导、恢复模式引导**
 - **DFU模式引导**
 
-![图1](https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/The%20iOS%20Boot%20Progress.png?raw=true)
+![图1][1]
 
 整个引导过程大概是这样的：
+
 1. 首先加载Boot ROM。(只有这一步骤是未加密的，其他的步骤是都是加密的)
 2. 接着判断是否是DFU模式，是则跳到步骤4，否则跳到步骤3。
-3. 
+3. 普通引导或恢复模式引导：
+	- 加载LLB（Low level Bootloader，底层引导加载器。
+	- 加载iBoot这个主引导加载器，它负责定位、准备并加载kernelCache（链接好的内核）。 
+4. DFU模式引导，使用了两个镜像iBSS和iBEC。
+	- iBSS：负责底层初始化以及iBEC的加载。
+	- iBEC：负责iTunes通过USB升级的过程。
 
-### 普通引导
-### 恢复模式引导
+### 普通引导或恢复模式引导
+#### LLB
+它是iOS镜像的一部分，可以在镜像中的Firmware/all_flash.xxxlp.production/下找到一个名为LLB.xxx.RELEASE.img3的文件。
+#### iBoot
+iBoot自带一个内建的HFS+的驱动程序，可以访问iOS的文件系统，iBoot是多线程的，通常至少派生两个线程：
+
+- **“main”线程**，负责苹果的logo，以及系统的引导。
+- **“uart reader”线程**，这个线程用户调试用。
+
+正常情况下，iBoot会调用fsboot()函数，这个函数会挂在iOS文件系统分区，定位内核，准备设备树并引导系统。如果引导失败（或终止），iBoot进入**恢复模式**，main线程会派生几下几个任务：
+
+- **idleoff任务**，当用户不操作时，关闭设备。
+- **poweroff任务**，当电量不足的时候，关闭设备。
+- **usb-req任务**，处理iTunes的USB请求。
+- **usb-high-current和usb-no-current任务**，响应USB充电。（当设备充电或者断开充电，修改电池图标）
+- **command任务**,启动命令行接口，即通过串口操作的控制台。
+
+#### 恢复模式引导与普通引导的区别
+恢复模式与普通引导的区别在于，恢复模式使用的文件系统是ramdisk，而不是使用包含了标准的iOS镜像的flash文件系统。它是一个完整的内存文件系统，可以用来替换根文件系统，并且flash文件系统可以挂载到这个文件系统，可以修改或更新文件系统。可以在iOS的镜像（ipsw）中找到。通常是iOS更新的第3个dmg。
+
 ### DFU模式引导
+再这个模式中，NAND闪存中的固件本省会被更新。当iOS有新版本更新或者越狱的时候会使用到这个模式。
+
+## Mac OS X的安装
+
+---
+[1]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/The%20iOS%20Boot%20Progress.png?raw=true
 
 
 
