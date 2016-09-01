@@ -49,7 +49,7 @@ iOS的引导是苹果独创的，构成如图1所示，起引导过程分两条�
 - **普通引导、恢复模式引导**
 - **DFU模式引导**
 
-![图1]()
+![图1](https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/The%20iOS%20Boot%20Progress.png?raw=true)
 
 整个引导过程大概是这样的：
 1. 首先加载Boot ROM。(只有这一步骤是未加密的，其他的步骤是都是加密的)
