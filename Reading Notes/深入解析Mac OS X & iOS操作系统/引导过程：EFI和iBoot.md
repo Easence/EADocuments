@@ -47,7 +47,7 @@
 3. 内核回调EFI运行时服务。
 
 ## iOS的iBoot
-iOS的引导是苹果独创的，构成如图1所示，起引导过程分两条主线：
+iOS的引导是苹果独创的，构成如下图所示，起引导过程分两条主线：
 
 - **普通引导、恢复模式引导**
 - **DFU模式引导**
@@ -90,11 +90,21 @@ iBoot自带一个内建的HFS+的驱动程序，可以访问iOS的文件系统�
 
 ## OS X的安装过程
 ### 步骤1：installXXX.app
-### 步骤2：OSinstaller
+安装包包含的文件如下图所示：
+![图2][2]
+运行这个app之后，会展示一个GUI界面，收集一些用户的输入信息之后，将kernelcache、boot.efi和InstallESD.dmg这些文件拷贝到/Mac OS X Install Data这个特殊目录下，然后告诉内核挂载InstallESD.dmg作为容器镜像，其目的是为了找到用作`根文件系统`的镜像--BaseSystem.dmg，然后通过`bless`命令修改引导盘，使得系统从InstallESD.dmg引导。操作成功后，系统自动重启至新的镜像。
+
+### 步骤2：OSInstaller
+引导进入新系统，运行对应的kernelcache后，镜像会让luanchd运行OSInstaller，OSInstaller会从minstallconfig.xml获取安装数据，并执行diskmanagementd，重新将所有需要的磁盘分区，接着会准备一个恢复卷，其实就是：BaseSystem.dmg。
 ### 步骤3：安装.pkg文件
+最后就是安装各种各样的软件包了。
+
+## iOS文件系统镜像（.ipsw文件）
+
 
 ---
 [1]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/The%20iOS%20Boot%20Progress.png?raw=true
+[2]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/OSX_Installer_files.png?raw=true
 
 
 
