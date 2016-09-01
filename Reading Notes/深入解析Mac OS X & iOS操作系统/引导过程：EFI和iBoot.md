@@ -100,12 +100,16 @@ iBoot自带一个内建的HFS+的驱动程序，可以访问iOS的文件系统�
 最后就是安装各种各样的软件包了。
 
 ## iOS文件系统镜像（.ipsw文件）
+将.ipsw文件解压以后可以看到下图展示的文件，大部分都是img3格式的文件，它们都是加密过的。
+![图3][3]
 
+> 可以使用工具[wpwntool][4]解密文件，使用[vfdecrypt][4]解密系统镜像。
 
 ---
 [1]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/The%20iOS%20Boot%20Progress.png?raw=true
 [2]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/OSX_Installer_files.png?raw=true
-
+[3]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/ipsw.png?raw=true
+[4]: http://theiphonewiki.com/
 
 
 
