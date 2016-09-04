@@ -31,6 +31,46 @@ iOS Jetsam机制，可以强制施行虚拟内存使用率限制。
 
 ### 整合了I/O Kit
 
+## iOS的launchDeamon
+iOS包含的launchDeamon列表如下图所示：
+![launchDeamon][1]
+
+**其中最重要的两个守护进程是lockdownd和SpringBoard**
+
+### lockdownd
+lockdownd有launchd启动，它负责处理设备激活、备份、崩溃报告、设备同步以及其他的服务。
+
+### SpringBoard
+- 创建GUI
+- 处理UI，如果SpringBoard停止了所有UI事件都无法到达相应的应用，只有SpingBoard恢复执行的时候，才会将所有排队的UI事件投递到应用程序。
+- SpringBoard包含大量的线程，比如：
+	- 有Web相关的线程（WebCore和WebThread）
+	- WiFiManager
+	- CoreAnimation
+- SpringBoard通过launchd注册了很多Mach端口，其中最重要的是`PurpleSystemEventPort`，这个端口通过GSEvent消息的方式处理UI事件。SPringBoard的主线程调用GSEventRun(),GSEventRun()是一个处理UI消息的CFRunloop。
+
+## XPC
+- XPC是Lion和iOS5以后引入的轻量级的进程间通信原语。XPC和GCD紧密结合在一起。XPC依赖两个私有的框架：XPCService和XPCObjects。前者负责处理XPC服务运行时相关的事务，后者为XPC对象提供编码和解码服务。iOS还包含一个私有框架：XPCKit。常用函数有：
+
+```
+xpc_connection_send_message(xpc_connection_t connection, xpc_object_t message); //Send message asynchronously on connection.
+```
+```
+xpc_connection_send_barrier(xpc_connection_t connection, dispatch_block_t barrier); //Execute barrier block after last message is sent on connection.
+```
+```
+xpc_connection_send_message_with_reply(xpc_connection_t connection, xpc_object_t message, dispatch_queue_t replyq, xpc_handler_t handler); //Send message, but also asynchronously execute handler in dispatch queue replyq when a reply is received.
+```
+```
+xpc_object_txpc_connection_send_message_with_reply_sync(xpc_connection_t connection, xpc_object_t message); //Send message, blocking until a reply is received, and return reply as the xpc_ object_t return value
+```
+- XPC的例子可以参照：苹果官方的[SandboxedFetch][2]
+
+
+---
+[1]: https://github.com/Easence/EADocuments/blob/master/Reading%20Notes/深入解析Mac%20OS%20X%20&%20iOS操作系统/Resources/Images/iOSLaunchDeamon.png?raw=true
+[2]: https://developer.apple.com/library/mac/samplecode/SandboxedFetch/Introduction/Intro.html#//apple_ref/doc/uid/DTS40011117-Intro-DontLinkElementID_2
+
 
 
 
