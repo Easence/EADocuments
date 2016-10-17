@@ -1,10 +1,13 @@
-﻿# Mach-O格式文件(用户态下的进程加载)
-
-标签（空格分隔）： 《OSX&iOS内核》 读书笔记
-
+﻿---
+title: Mach-O格式文件(用户态下的进程加载)
+categories: 
+ - Apple Development
+ - 深入解析Mac OS X && iOS操作系统笔记
+ - 内核
+tags:
+ - 内核
+ - Mach
 ---
-[TOC]
-___
 
 ## Mach-O二进制文件
 Mach-O的文件头包含的内容:

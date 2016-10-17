@@ -1,11 +1,14 @@
-# 引导过程：EFI和iBoot
-
-标签（空格分隔）： 《OSX&iOS内核》 读书笔记
-
 ---
-[TOC]
+title: 引导过程：EFI和iBoot
+categories: 
+ - Apple Development
+ - 深入解析Mac OS X && iOS操作系统笔记
+ - 内核
+tags:
+ - 内核
+---
 
-##什么是引导过程
+## 什么是引导过程
 引导过程指的是：从计算机通电的那一瞬间到CPU开始执行操作系统代码时的整个过程。整个过程大概是这样子的：
 
 1. 刚通电的时候，BIOS或者固件会加载一些自举代码（bootstrap）给CPU，这些代码会探测各种存在设备。

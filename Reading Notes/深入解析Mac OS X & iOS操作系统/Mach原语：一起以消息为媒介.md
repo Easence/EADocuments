@@ -1,4 +1,13 @@
-# Mach原语：一起以消息为媒介
+---
+title: Mach原语：一起以消息为媒介
+categories: 
+ - Apple Development
+ - 深入解析Mac OS X && iOS操作系统笔记
+ - 内核
+tags:
+ - Mach
+---
+
 ## 1. Mach概述
 ### 1.1 Mach设计原则
 - 在Mach中所有东西（Task、线程、虚拟内存等））都是对象。

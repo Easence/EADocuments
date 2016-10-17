@@ -1,4 +1,13 @@
-#贯穿始终-launchd
+---
+title: 贯穿始终-launchd
+categories: 
+ - Apple Development
+ - 深入解析Mac OS X && iOS操作系统笔记
+ - 内核
+tags:
+ - 内核
+ - launchd
+---
 
 ## launchd
 launchd（PID 1）有内核直接启动，是用户态的第一个进程，其他进程都是由它直接或者间接的启动的。其他的launchd（比如其他用户远程登录后会对应创建一个launchd）都是由launchd（PID 1）启动的。
@@ -53,16 +62,21 @@ lockdownd有launchd启动，它负责处理设备激活、备份、崩溃报告�
 - XPC是Lion和iOS5以后引入的轻量级的进程间通信原语。XPC和GCD紧密结合在一起。XPC依赖两个私有的框架：XPCService和XPCObjects。前者负责处理XPC服务运行时相关的事务，后者为XPC对象提供编码和解码服务。iOS还包含一个私有框架：XPCKit。常用函数有：
 
 ```
-xpc_connection_send_message(xpc_connection_t connection, xpc_object_t message); //Send message asynchronously on connection.
+xpc_connection_send_message
+(xpc_connection_t connection, xpc_object_t message); //Send message asynchronously on connection.
 ```
 ```
-xpc_connection_send_barrier(xpc_connection_t connection, dispatch_block_t barrier); //Execute barrier block after last message is sent on connection.
+xpc_connection_send_barrier
+(xpc_connection_t connection, dispatch_block_t barrier); //Execute barrier block after last message is sent on connection.
 ```
 ```
-xpc_connection_send_message_with_reply(xpc_connection_t connection, xpc_object_t message, dispatch_queue_t replyq, xpc_handler_t handler); //Send message, but also asynchronously execute handler in dispatch queue replyq when a reply is received.
+xpc_connection_send_message_with_reply
+(xpc_connection_t connection, xpc_object_t message, dispatch_queue_t replyq, xpc_handler_t handler); //Send message, but also asynchronously execute handler in dispatch queue replyq when a reply is received.
 ```
 ```
-xpc_object_txpc_connection_send_message_with_reply_sync(xpc_connection_t connection, xpc_object_t message); //Send message, blocking until a reply is received, and return reply as the xpc_ object_t return value
+xpc_object_t
+xpc_connection_send_message_with_reply_sync
+(xpc_connection_t connection, xpc_object_t message); //Send message, blocking until a reply is received, and return reply as the xpc_ object_t return value
 ```
 - XPC的例子可以参照：苹果官方的[SandboxedFetch][2]
 
