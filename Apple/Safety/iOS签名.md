@@ -1,4 +1,4 @@
-﻿# iOS签名
+# iOS签名
 
 标签（空格分隔）： iOS 安全
 
@@ -60,11 +60,13 @@ codesign -v xxx.app
 zip -qry destination source
 ```
 ---
+
 参考文章：
-[漫谈iOS程序的证书和签名机制](https://segmentfault.com/a/1190000004144556)
-[iReSign](https://github.com/maciekish/iReSign)
-[re-sign-ios-app](https://gist.github.com/chaitanyagupta/9a2a13f0a3e6755192f7)
-[iOS Code Signing 学习笔记](http://foggry.com/blog/2014/10/16/ios-code-signing-xue-xi-bi-ji/)
+
+1. [漫谈iOS程序的证书和签名机制](https://segmentfault.com/a/1190000004144556)
+2. [iReSign](https://github.com/maciekish/iReSign)
+3. [re-sign-ios-app](https://gist.github.com/chaitanyagupta/9a2a13f0a3e6755192f7)
+4. [iOS Code Signing 学习笔记](http://foggry.com/blog/2014/10/16/ios-code-signing-xue-xi-bi-ji/)
 
 
 
