@@ -16,6 +16,7 @@
 3. [念茜的博客][4]
 4. [陈宏彬的博客][6]
 5. [移动App入侵与逆向破解技术－iOS篇][9]
+6. [手把手教你制作一款iOS越狱App，伪装微信位置][10]
 
 ### 参考书籍：
 1. [iOS应用逆向工程(第2版)][5]
@@ -29,6 +30,7 @@
 [7]: https://github.com/KJCracks/Clutch
 [8]: https://github.com/stefanesser/dumpdecrypted
 [9]: http://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&mid=2653577384&idx=1&sn=b44a9c9651bf09c5bea7e0337031c53c&scene=0#wechat_redirect 
+[10]: https://github.com/jackrex/FakeWeChatLoc/blob/master/README.md
 
 
 
