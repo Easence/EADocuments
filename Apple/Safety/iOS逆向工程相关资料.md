@@ -9,6 +9,7 @@
 3. [dumpdecrypted][8] : 砸壳
 4. [cycript](http://www.cycript.org) : 运行时调试工具
 5. logify
+6. MAC：Reveal，iOS：Reveal2Loader
 
 ### 参考博文：
 1. [我是如何利用Xcode调试开发微信消息预览插件的][1]
